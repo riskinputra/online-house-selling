@@ -29,10 +29,7 @@ const housesSchema = new Schema({
     type      : Number,
     required  : [true, 'Price is required']
   },
-  image       : {
-    data        : Buffer,
-    contentType : String
-  },
+  image       : String,
   kamarTidur  : Number,
   kamarMandi  : Number,
   bangunan    : Number,

@@ -9,6 +9,7 @@ const cors          = require('cors')
 const index         = require('./routes/index');
 const signup         = require('./routes/signup');
 const signin         = require('./routes/signin');
+const houses         = require('./routes/houses');
 // =============================================================
 const app           = express();
 require('dotenv').config()
@@ -37,6 +38,7 @@ app.use(cors())
 app.use('/', index);
 app.use('/signup', signup);
 app.use('/signin', signin);
+app.use('/houses', houses);
 
 // =============================================================
 // catch 404 and forward to error handler
