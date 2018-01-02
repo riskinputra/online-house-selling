@@ -13,7 +13,7 @@ class Signin {
       .then(result => {
         if(result){
           jwt.sign({id: dataUser.id, username: dataUser.username, email: req.body.email}, process.env.SECRET_KEY, function(err, token){
-            console.log(token);
+            // console.log(token);
             res.status(200).json({
               message: 'User Found',
               token: token
