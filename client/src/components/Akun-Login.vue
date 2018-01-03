@@ -24,6 +24,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     data: () => ({
       valid: true,
@@ -41,10 +42,16 @@
       submit () {
         if (this.$refs.form.validate()) {
           // Native form submission is not yet supported
-          axios.post('/api/submit', {
-            name: this.name,
-            email: this.email
+          axios.post('http://localhost:3000/signin', {
+            email: this.email,
+            password: this.password
           })
+          .then(result => {
+            console.log(result.data)
+            localStorage.setItem('token', result.data.token)
+            location.reload()
+          })
+          .catch(err => console.log(err))
         }
       },
       clear () {
