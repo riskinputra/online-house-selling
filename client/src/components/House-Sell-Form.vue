@@ -43,6 +43,7 @@
             <v-text-field
               color="blue darken-2"
               required
+              multi-line
               v-model="form.description"
               :rules="rules.description"
             >

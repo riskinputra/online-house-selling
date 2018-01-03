@@ -3,6 +3,10 @@ const uniqueValidator = require('mongoose-unique-validator');
 const Schema          = mongoose.Schema;
 
 const housesSchema = new Schema({
+  userId : {
+    type      : Schema.Types.ObjectId,
+    ref       : 'User'
+  },
   contactName: {
     type      : String,
     required  : [true, 'Contact Name is required']
