@@ -28,7 +28,6 @@
               v-model="form.contactNumber"
               required
               :rules="rules.contactNumber"
-              :mask="mask"
             ></v-text-field>
           </v-flex>
           <v-flex xs12>
@@ -228,13 +227,14 @@
           watt: [val => (val || '').length > 0 || 'This field is required'],
           thnBangun: [val => (val || '').length > 0 || 'This field is required']
         },
-        mask: '#############################',
+        mask: '##############################################################################',
         snackbar: false,
         center: {lat: -6.121435, lng: 106.774124},
         markers: [],
         content: null,
         lat: null,
         lng: null,
+        city: null,
         defaultForm
       }
     },
@@ -260,6 +260,9 @@
     },
     methods: {
       setPlace (place) {
+        console.log(place.address_components[3])
+        this.city = `${place.address_components[2].long_name}, ${place.address_components[3].long_name}`
+        console.log(this.city)
         this.content = place.formatted_address 
         this.lat = place.geometry.location.lat()
         this.lng = place.geometry.location.lng()
@@ -288,7 +291,8 @@
         newData.append('contactName', this.form.contactName)
         newData.append('contactNumber', this.form.contactNumber)
         newData.append('title', this.form.title)
-        newData.append('address', this.contactName)
+        newData.append('address', this.content)
+        newData.append('city', this.city)
         newData.append('latitude', this.lat)
         newData.append('longtitude', this.lng)
         newData.append('image', this.form.image)
@@ -300,6 +304,7 @@
         newData.append('lantai', this.form.lantai)
         newData.append('watt', this.form.watt)
         newData.append('thnBangun', this.form.thnBangun)
+        console.log(newData)
         axios.post('http://localhost:3000/houses', newData, 
         {
           headers: {
@@ -307,7 +312,8 @@
           }
         })
         .then(result => {
-          console.log(result);
+          console.log(result)
+          this.$router.replace('/')
         })
         .catch(err => {
             console.log(err);

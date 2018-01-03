@@ -19,6 +19,9 @@ const housesSchema = new Schema({
     type      : String,
     required  : [true, 'Address is required']
   },
+  city: {
+    type      : String
+  },
   latitude    : {
     type      : Number,
   },

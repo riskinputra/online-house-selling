@@ -5,7 +5,7 @@ class HouseController {
   static findAll(req, res) {
     House.find()
     .then( result => {
-      res.ststus(200).json({
+      res.status(200).json({
         message: 'House List',
         data: result
       })
@@ -22,6 +22,7 @@ class HouseController {
       contactNumber: req.body.contactNumber,
       title: req.body.title,
       address: req.body.address,
+      city: req.body.city,
       latitude: req.body.latitude || null,
       longtitude: req.body.longtitude || null,
       price: req.body.price,
@@ -46,6 +47,16 @@ class HouseController {
     })
   }
 
+  static findById(req, res) {
+    House.findById(req.params.id)
+    .then(result => {
+      res.status(200).json({
+        message: 'Data Found',
+        data: result
+      })
+    })
+    .catch(err => res.status(500).send(err))
+  }
 }
 
 module.exports = HouseController
