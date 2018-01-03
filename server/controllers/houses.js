@@ -16,14 +16,14 @@ class HouseController {
   }
 
   static addHouse(req, res) {
-
+    
     let dataHouse = new House({
       contactName: req.body.contactName,
       contactNumber: req.body.contactNumber,
       title: req.body.title,
       address: req.body.address,
-      latitude: null,
-      longtitude: null,
+      latitude: req.body.latitude || null,
+      longtitude: req.body.longtitude || null,
       price: req.body.price,
       image: req.file.cloudStoragePublicUrl,
       kamarTidur: req.body.kamarTidur,

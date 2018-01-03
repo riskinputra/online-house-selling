@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
+
+const http = axios.create({
+  baseURL: 'http://localhost:3000'
+})
 
 export const store = new Vuex.Store({
   strict: true,
@@ -16,5 +21,17 @@ export const store = new Vuex.Store({
       {id: 6, title:'Rabbit', desc:'Located two hours south of Sydney in the Southern Highlands of New South Wales, ...', src:'http://pauk.property/wp-content/uploads/2017/10/reasons-your-house-might-not-be-selling.jpg'},
       {id: 7, title:'Turtle', desc:'Located two hours south of Sydney in the Southern Highlands of New South Wales, ...', src:'http://pauk.property/wp-content/uploads/2017/10/reasons-your-house-might-not-be-selling.jpg'}
     ]
+  },
+  mutations: {
+    
+  },
+  actions: {
+    addUser ({ commit }, newUser) {
+      http.post('/signup', newUser)
+      .then(({data}) => {
+        console.log('data hasil add user', data)
+      })
+      .catch(err => console.log(err))
+    }
   }
 })

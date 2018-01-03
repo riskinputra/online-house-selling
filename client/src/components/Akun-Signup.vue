@@ -3,26 +3,27 @@
   <v-form v-model="valid" ref="form" lazy-validation>
     <v-text-field
       label="Username"
-      v-model="username"
+      v-model="formUser.username"
       :rules="usernameRules"
       :counter="20"
       required
     ></v-text-field>
     <v-text-field
       label="E-mail"
-      v-model="email"
+      v-model="formUser.email"
       :rules="emailRules"
       required
     ></v-text-field>
     <v-text-field
       label="Password"
-      v-model="password"
+      type="password"
+      v-model="formUser.password"
       :rules="passwordRules"
       required
     ></v-text-field>
 
     <v-btn
-      @click="submit"
+      @click="addUser(formUser)"
       :disabled="!valid"
     >
       submit
@@ -32,39 +33,51 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
-    data: () => ({
-      valid: true,
-      password: '',
-      passwordRules: [
-        (v) => !!v || 'Password is required'
-      ],
-      username: '',
-      usernameRules: [
-        (v) => !!v || 'Username is required',
-        (v) => v && v.length <= 20 || 'Username must be less than 10 characters'
-      ],
-      email: '',
-      emailRules: [
-        (v) => !!v || 'E-mail is required',
-        (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-      ]
-    }),
+    data () {
+      return {
+        valid: true,
+        formUser: {
+          password: '',
+          username: '',
+          email: ''
+        },
+        passwordRules: [
+          (v) => !!v || 'Password is required'
+        ],
+        usernameRules: [
+          (v) => !!v || 'Username is required',
+          (v) => v && v.length <= 20 || 'Username must be less than 10 characters'
+        ],
+        emailRules: [
+          (v) => !!v || 'E-mail is required',
+          (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+        ]
+      }
+    },
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
           // Native form submission is not yet supported
-          axios.post('/api/submit', {
+          axios.post('http://localhost:3000/signup', {
             username: this.username,
             email: this.email,
-            select: this.select,
-            checkbox: this.checkbox
+            password: this.password
+          })
+          .then(result => {
+            console.log(result)
+            // localStorage.setItem('userId', result.data.data._id)
           })
         }
       },
       clear () {
         this.$refs.form.reset()
-      }
+      },
+      ...mapActions([
+        'addUser'
+      ])
     }
   }
 </script>

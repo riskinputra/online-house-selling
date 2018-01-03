@@ -1,16 +1,16 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
     <v-text-field
+      label="E-mail"
+      v-model="email"
+      :rules="emailRules"
+      required
+    ></v-text-field>
+    <v-text-field
       label="Password"
       type="password"
       v-model="password"
       :rules="passwordRules"
-      required
-    ></v-text-field>
-    <v-text-field
-      label="E-mail"
-      v-model="email"
-      :rules="emailRules"
       required
     ></v-text-field>
     <v-btn

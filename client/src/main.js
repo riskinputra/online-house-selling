@@ -6,9 +6,16 @@ import router from './router'
 import { store } from './vuex/store'
 import Vuetify from 'vuetify'
 import('vuetify/dist/vuetify.min.css')
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyAFZ44PGwSAWU9RAu7xpuToJHJjIPhl8Is',
+    libraries: 'places'
+  }
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
