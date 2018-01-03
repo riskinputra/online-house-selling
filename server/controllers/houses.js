@@ -21,6 +21,7 @@ class HouseController {
       contactName: req.body.contactName,
       contactNumber: req.body.contactNumber,
       title: req.body.title,
+      description: req.body.description,
       address: req.body.address,
       city: req.body.city,
       latitude: req.body.latitude || null,

@@ -40,6 +40,18 @@
             ></v-text-field>
           </v-flex>
           <v-flex xs12>
+            <v-text-field
+              color="blue darken-2"
+              required
+              v-model="form.description"
+              :rules="rules.description"
+            >
+              <div slot="label">
+                Description*
+              </div>
+            </v-text-field>
+          </v-flex>
+          <v-flex xs12>
             <div class="input-group input-group--error input-group--required input-group--text-field error--text">
               <div class="input-group__input">
                 <GmapAutocomplete name="location" id="location" required="" @place_changed="setPlace"></GmapAutocomplete>
@@ -198,6 +210,7 @@
         contactName: '',
         contactNumber: '',
         title: '',
+        description: '',
         address: '',
         image: '',
         price: null,
@@ -217,6 +230,7 @@
           contactNumber: [val => (val || '').length > 0 || 'This field is required'],
           title: [val => (val || '').length > 0 || 'This field is required'],
           address: [val => (val || '').length > 0 || 'This field is required'],
+          description: [val => (val || '').length > 0 || 'This field is required'],
           image: [val => (val || '').length > 0 || 'This field is required'],
           price: [val => (val || '').length > 0 || 'This field is required'],
           kamarTidur: [val => (val || '').length > 0 || 'This field is required'],
@@ -245,6 +259,7 @@
           this.form.contactName &&
           this.form.contactNumber &&
           this.form.title &&
+          this.form.description &&
           this.content &&
           this.form.image &&
           this.form.price &&
@@ -291,6 +306,7 @@
         newData.append('contactName', this.form.contactName)
         newData.append('contactNumber', this.form.contactNumber)
         newData.append('title', this.form.title)
+        newData.append('description', this.form.description)
         newData.append('address', this.content)
         newData.append('city', this.city)
         newData.append('latitude', this.lat)

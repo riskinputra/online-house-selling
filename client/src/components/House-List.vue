@@ -41,16 +41,13 @@
           </v-card-actions>
         </v-card>
       </v-flex>
-      <!-- <v-flex xs-12 class="text-xs-center">
-        <v-pagination :length="pagination.pages" v-model="pagination.page" @input="next" circle></v-pagination>
-      </v-flex> -->
     </v-layout>
   </v-container>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
-
+import axios from 'axios'
 export default {
   components: {
     
@@ -70,11 +67,11 @@ export default {
   },
   methods: {
     detailHouse (id) {
-      console.log(id)
       axios.get(`http://localhost:3000/houses/${id}`)
       .then(result => {
-        console.log(result)
-        this.$router.replace('/detail-house')
+        console.log(result.data.data._id)
+        let id = result.data.data._id
+        this.$router.replace(`/detail-house/${id}`)
       })
       .catch(err => console.log(err))
     },

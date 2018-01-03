@@ -15,6 +15,10 @@ const housesSchema = new Schema({
     type      : String,
     required  : [true, 'Title is required']
   },
+  description: {
+    type      : String,
+    required  : [true, 'description is required']
+  },
   address: {
     type      : String,
     required  : [true, 'Address is required']
