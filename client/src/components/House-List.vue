@@ -56,7 +56,7 @@
       <v-flex xs12>
         <v-card v-if="filteredList.length === 0">
           <v-card-title primary-title>
-            <p text-xs-center>No Match Found</p>
+            <p text-xs-center>Data Not Found</p>
           </v-card-title>
         </v-card>
       </v-flex>

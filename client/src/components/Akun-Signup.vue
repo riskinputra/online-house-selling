@@ -68,6 +68,7 @@
           })
           .then(result => {
             console.log(result)
+            location.reload()
             // localStorage.setItem('userId', result.data.data._id)
           })
         }
