@@ -142,7 +142,7 @@ export default {
   }
   textarea {
     resize: none; 
-    width:200%; 
+    width:150%; 
     height:300px
   }
   @media (max-width: 767px) {

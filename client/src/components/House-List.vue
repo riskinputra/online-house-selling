@@ -3,8 +3,20 @@
     <v-layout row wrap id="house-list">
       <v-flex xs12>
         <h1>House List</h1>
+        <v-divider></v-divider>
       </v-flex>
-      <v-flex md4 xs12 v-for="item in houseLists" :key="item.id">
+      <v-flex xs12>
+        <v-text-field
+          light
+          solo
+          v-model="search"
+          prepend-icon="search"
+          placeholder="Search"
+          style="width: 100%; min-width: 128px"
+        ></v-text-field>
+        <v-divider></v-divider>
+      </v-flex>
+      <v-flex md4 xs12 v-for="item in filteredList" :key="item.id">
         <v-card>
           <v-card-media :src="item.image" height="200px">
           </v-card-media>
@@ -30,7 +42,7 @@
                 <img src="../../static/icons8-department-50.png" alt="bangunan" height="30px">
               </v-badge>
               <v-badge overlay color="orange">
-                <span slot="badge" style="font-size:9px;">{{item.tanah}}</sup></span>
+                <span slot="badge" style="font-size:9px;">{{item.tanah}}</span>
                 <img src="../../static/icons8-fit-to-width-50.png" alt="tanah" height="30px">
               </v-badge>
             </div>
@@ -39,6 +51,13 @@
           <v-card-actions>
             <v-btn flat color="blue" @click="detailHouse(item._id)">Detail</v-btn>
           </v-card-actions>
+        </v-card>
+      </v-flex>
+      <v-flex xs12>
+        <v-card v-if="filteredList.length === 0">
+          <v-card-title primary-title>
+            <p text-xs-center>No Match Found</p>
+          </v-card-title>
         </v-card>
       </v-flex>
     </v-layout>
@@ -54,16 +73,18 @@ export default {
   },
   data () {
     return {
-      nextId: 8,
-      currentPage: 0,
-      pageSize: 8,
-      vissiblePage: []
+      search: ''
     }
   },
   computed: {
     ...mapState([
       'houseLists'
-    ])
+    ]),
+    filteredList() {
+      return this.houseLists.filter(post => {
+        return post.title.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
   },
   methods: {
     detailHouse (id) {
