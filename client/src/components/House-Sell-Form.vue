@@ -331,7 +331,7 @@
         newData.append('watt', this.form.watt)
         newData.append('thnBangun', this.form.thnBangun)
         // console.log(newData)
-        axios.post('http://localhost:3000/houses', newData, 
+        axios.post('http://35.197.159.250:3001/houses', newData, 
         {
           headers: {
             'content-type': 'multipart/form-data'

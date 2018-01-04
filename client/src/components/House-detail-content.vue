@@ -119,7 +119,7 @@ export default {
   },
   created () {
     let id = this.$route.params.id
-    axios.get(`http://localhost:3000/houses/${id}`)
+    axios.get(`http://35.197.159.250:3001/houses/${id}`)
     .then(result => {
       this.detailHouse = result.data.data
       console.log(this.detailHouse)

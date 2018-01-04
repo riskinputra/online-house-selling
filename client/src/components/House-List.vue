@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     detailHouse (id) {
-      axios.get(`http://localhost:3000/houses/${id}`)
+      axios.get(`http://35.197.159.250:3001/houses/${id}`)
       .then(result => {
         console.log(result.data.data._id)
         let id = result.data.data._id

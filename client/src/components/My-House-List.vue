@@ -88,7 +88,7 @@ export default {
   methods: {
     editMyHouse (id) {
       console.log(id)
-      axios.get(`http://localhost:3000/houses/${id}`)
+      axios.get(`http://35.197.159.250:3001/houses/${id}`)
       .then(result => {
         console.log(result.data.data._id)
         let id = result.data.data._id
@@ -98,7 +98,7 @@ export default {
     },
     deleteMyHouse (id) {
       console.log(id)
-      axios.delete(`http://localhost:3000/myHouses/${id}`)
+      axios.delete(`http://35.197.159.250:3001/myHouses/${id}`)
       .then(result => {
         this.snackbar = true
         location.reload()
@@ -106,7 +106,7 @@ export default {
       .catch(err => console.log(err))
     },
     detailHouse (id) {
-      axios.get(`http://localhost:3000/houses/${id}`)
+      axios.get(`http://35.197.159.250:3001/houses/${id}`)
       .then(result => {
         console.log(result.data.data._id)
         let id = result.data.data._id

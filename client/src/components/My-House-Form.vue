@@ -251,7 +251,7 @@
         this.userId = decode.id
 
         let id = this.$route.params.id
-        axios.get(`http://localhost:3000/houses/${id}`)
+        axios.get(`http://35.197.159.250:3001/houses/${id}`)
         .then(result => {
           this.detailHouse = result.data.data
           this.center = {lat: this.detailHouse.latitude, lng: this.detailHouse.longtitude}
@@ -325,7 +325,7 @@
         newData.append('watt', this.form.watt)
         newData.append('thnBangun', this.form.thnBangun)
         // console.log(newData)
-        axios.put(`http://localhost:3000/myHouses/${id}`, newData, 
+        axios.put(`http://35.197.159.250:3001/myHouses/${id}`, newData, 
         {
           headers: {
             'content-type': 'multipart/form-data'
