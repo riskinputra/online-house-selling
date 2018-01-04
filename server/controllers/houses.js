@@ -18,6 +18,7 @@ class HouseController {
   static addHouse(req, res) {
     
     let dataHouse = new House({
+      userId: req.body.userId,
       contactName: req.body.contactName,
       contactNumber: req.body.contactNumber,
       title: req.body.title,

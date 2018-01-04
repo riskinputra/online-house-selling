@@ -199,6 +199,7 @@
 
 
 <script>
+  import jwt_decode from 'jwt-decode'
   import VueImgInputer from 'vue-img-inputer'
   import axios from 'axios'
 
@@ -250,10 +251,17 @@
         lat: null,
         lng: null,
         city: null,
+        userId: '',
         defaultForm
       }
     },
-
+    created () {
+      if (localStorage.getItem('token')) {
+        let token = localStorage.getItem('token')
+        let decode = jwt_decode(token)
+        this.userId = decode.id
+      }
+    },
     computed: {
       formIsValid () {
         return (
@@ -276,9 +284,9 @@
     },
     methods: {
       setPlace (place) {
-        console.log(place.address_components[3])
+        // console.log(place.address_components[3])
         this.city = `${place.address_components[2].long_name}, ${place.address_components[3].long_name}`
-        console.log(this.city)
+        // console.log(this.city)
         this.content = place.formatted_address 
         this.lat = place.geometry.location.lat()
         this.lng = place.geometry.location.lng()
@@ -304,6 +312,7 @@
       submit () {
         this.snackbar = true
         let newData = new FormData()
+        newData.append('userId', this.userId)
         newData.append('contactName', this.form.contactName)
         newData.append('contactNumber', this.form.contactNumber)
         newData.append('title', this.form.title)
@@ -321,7 +330,7 @@
         newData.append('lantai', this.form.lantai)
         newData.append('watt', this.form.watt)
         newData.append('thnBangun', this.form.thnBangun)
-        console.log(newData)
+        // console.log(newData)
         axios.post('http://localhost:3000/houses', newData, 
         {
           headers: {
