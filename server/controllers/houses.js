@@ -15,6 +15,21 @@ class HouseController {
     })
   }
 
+  static findMyHouse(req, res) {
+    House.find({userId: req.query.userId})
+    .populate('userId')
+    .exec()
+    .then(results => {
+      res.status(200).json({
+        message   : 'My House',
+        data      : results
+      })
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
+  }
+
   static addHouse(req, res) {
     
     let dataHouse = new House({
@@ -59,6 +74,7 @@ class HouseController {
     })
     .catch(err => res.status(500).send(err))
   }
+
 }
 
 module.exports = HouseController

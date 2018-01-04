@@ -6,7 +6,7 @@
     <template>
       <v-list-tile v-show="hide">
         <v-list-tile-action>
-          <v-icon>account_circle</v-icon>
+          <v-icon color="blue">account_circle</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title class="grey--text">
@@ -17,7 +17,7 @@
       <v-divider dark class="my-4"></v-divider>
       <v-list-tile>
         <v-list-tile-action>
-          <v-icon>home</v-icon>
+          <v-icon color="blue">home</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>
@@ -27,7 +27,7 @@
       </v-list-tile>
       <v-list-tile>
         <v-list-tile-action>
-          <v-icon>description</v-icon>
+          <v-icon color="blue">description</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>
@@ -37,7 +37,7 @@
       </v-list-tile>
       <v-list-tile v-show="hide">
         <v-list-tile-action>
-          <v-icon>store</v-icon>
+          <v-icon color="blue">store</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>
@@ -45,9 +45,19 @@
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile>
+      <v-list-tile v-show="hide">
         <v-list-tile-action>
-          <v-icon>assignment_ind</v-icon>
+          <v-icon color="blue">account_balance</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>
+            <a href="#" id="nav" class="grey--text" @click="myHouse">My House</a>
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile v-show="akun">
+        <v-list-tile-action>
+          <v-icon color="blue">assignment_ind</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>
@@ -58,7 +68,7 @@
       <v-divider dark class="my-4"></v-divider>
       <v-list-tile v-show="hide">
         <v-list-tile-action>
-          <v-icon>power_settings_new</v-icon>
+          <v-icon color="blue">power_settings_new</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>
@@ -81,7 +91,8 @@ export default {
   data () {
     return {
       username: 'Riski',
-      hide: false
+      hide: false,
+      akun: true
     }
   },
   created () {
@@ -91,7 +102,7 @@ export default {
       console.log(decode)
       this.username = decode.username
       this.hide = true
-
+      this.akun = false
     }
   },
   methods: {
@@ -105,6 +116,9 @@ export default {
       localStorage.clear()
       this.$router.replace('/')
       location.reload()
+    },
+    myHouse () {
+      this.$router.replace('/my-house')
     }
   }  
 }

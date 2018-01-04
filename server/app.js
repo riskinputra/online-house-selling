@@ -10,6 +10,7 @@ const index         = require('./routes/index');
 const signup         = require('./routes/signup');
 const signin         = require('./routes/signin');
 const houses         = require('./routes/houses');
+const myHouses         = require('./routes/myHouses');
 // =============================================================
 const app           = express();
 require('dotenv').config()
@@ -39,6 +40,7 @@ app.use('/', index);
 app.use('/signup', signup);
 app.use('/signin', signin);
 app.use('/houses', houses);
+app.use('/myHouses', myHouses);
 
 // =============================================================
 // catch 404 and forward to error handler
