@@ -306,6 +306,7 @@
       },
       submit () {
         this.snackbar = true
+        let id = this.$route.params.id
         let newData = new FormData()
         newData.append('contactName', this.form.contactName)
         newData.append('contactNumber', this.form.contactNumber)
@@ -324,7 +325,7 @@
         newData.append('watt', this.form.watt)
         newData.append('thnBangun', this.form.thnBangun)
         // console.log(newData)
-        axios.post('http://localhost:3000/houses', newData, 
+        axios.put(`http://localhost:3000/myHouses/${id}`, newData, 
         {
           headers: {
             'content-type': 'multipart/form-data'
@@ -332,7 +333,7 @@
         })
         .then(result => {
           console.log(result)
-          this.$router.replace('/')
+          this.$router.replace('/my-house')
         })
         .catch(err => {
             console.log(err);
