@@ -37,11 +37,10 @@
       <v-flex xs12>
         <v-card>
           <v-card-title primary-title>
-            <h2>Deskripsi</h2>
-            <v-divider></v-divider>
-            <div>{{detailHouse.description}}</div>
-            <br><br>
             <div style="padding-top:15px;">
+              <h2>Deskripsi</h2>
+              <v-divider></v-divider>
+              <textarea v-model="detailHouse.description" xs12></textarea>
               <p><img style="float:left; padding-right:10px;" src="../../static/change.png" height="15px" alt="alamat">Rp {{detailHouse.price}}</p>
               <p><img style="float:left; padding-right:10px;" src="../../static/users.png" height="15px" alt="alamat"> {{detailHouse.contactName}}</p>
               <p><img style="float:left; padding-right:10px;" src="../../static/smartphone.png" height="15px" alt="alamat"> {{detailHouse.contactNumber}}</p>
@@ -140,5 +139,15 @@ export default {
   #map{
     width: 100%; 
     height: 225px;
+  }
+  textarea {
+    resize: none; 
+    width:200%; 
+    height:300px
+  }
+  @media (max-width: 767px) {
+    textarea {
+      width:100%; 
+    }
   }
 </style>

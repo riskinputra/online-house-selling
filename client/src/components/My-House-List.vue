@@ -1,6 +1,15 @@
 <template>
   <v-container grid-list-md text-xs-center>
     <v-layout row wrap id="house-list">
+        <v-snackbar
+          v-model="snackbar"
+          absolute
+          multi-line
+          color="success"
+        >
+          <span>Delete House successful!</span>
+          <v-icon dark>check_circle</v-icon>
+        </v-snackbar>
       <v-flex xs12>
         <h1>House List</h1>
       </v-flex>
@@ -39,7 +48,18 @@
           <v-card-actions>
             <div justify-center>
               <v-btn color="primary" dark @click="editMyHouse(item._id)">Edit</v-btn>
-              <v-btn color="red" dark >Delete</v-btn>
+              <v-btn color="red" dark @click.native.stop="dialog = true">Delete</v-btn>
+              <v-btn color="green" dark @click="detailHouse(item._id)">Detail</v-btn>
+              <v-dialog v-model="dialog" max-width="290">
+                <v-card>
+                  <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Disagree</v-btn>
+                    <v-btn color="green darken-1" flat="flat" @click="deleteMyHouse(item._id)">Agree</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </div>
           </v-card-actions>
         </v-card>
@@ -56,7 +76,8 @@ export default {
   },
   data () {
     return {
-      
+      snackbar: false,
+      dialog: false
     }
   },
   computed: {
@@ -72,6 +93,24 @@ export default {
         console.log(result.data.data._id)
         let id = result.data.data._id
         this.$router.replace(`/edit-house/${id}`)
+      })
+      .catch(err => console.log(err))
+    },
+    deleteMyHouse (id) {
+      console.log(id)
+      axios.delete(`http://localhost:3000/myHouses/${id}`)
+      .then(result => {
+        this.snackbar = true
+        location.reload()
+      })
+      .catch(err => console.log(err))
+    },
+    detailHouse (id) {
+      axios.get(`http://localhost:3000/houses/${id}`)
+      .then(result => {
+        console.log(result.data.data._id)
+        let id = result.data.data._id
+        this.$router.replace(`/detail-house/${id}`)
       })
       .catch(err => console.log(err))
     },
